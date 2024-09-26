@@ -31,5 +31,17 @@ class Library_Testing(unittest.TestCase):
         self.Library.returnbook("23-978-5163-389")
         self.assertTrue(book.available)
         
+    def test_view_available_books(self):
+        book1 = Book(isbn="12-231-978-5163-389",title="Data Structure Using CPP",author="Amit Verma",publicationYear=2015)
+        book2 = Book(isbn="23-978-5163-389", title="Object Oriented Programing in Java", author="Rick Halterman", publicationYear=2013)
+        self.Library.addbook(book1)
+        self.Library.addbook(book2)
+        self.Library.borrowbook("23-978-5163-389")
+        available_books = self.Library.view_availablebooks()
+        self.assertIn(book2, available_books)
+        self.assertNotIn(book1, available_books)
+
+
+        
 if __name__ == '__main__':
     unittest.main()
