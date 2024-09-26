@@ -12,3 +12,15 @@ class Library:
 
     def addbook(self,book):
         self.books.append(book)
+        
+    def borrowbook(self,isbn):
+        book = None
+        for b in self.books:
+            if b.isbn == isbn:
+                book = b
+                break
+        if book is None:
+            raise Exception("Book Not Found")
+        if not book.available:
+            raise Exception("Book Not Available")
+        book.available = False
